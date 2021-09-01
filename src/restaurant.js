@@ -78,7 +78,55 @@
 // PASSO 4: Adicione ao objeto retornado por `createMenu()` uma chave `pay` com uma função que varre todo os itens de `objetoRetornado.consumption`, 
 // soma o preço de todos checando-os no menu e retorna o valor somado acrescido de 10%. DICA: para isso, 
 // você precisará varrer tanto o objeto da chave `food` quanto o objeto da chave `drink`.
+// Solução do includes dada pelo Marcelo.
 
-const createMenu = () => {};
+const createMenu = (objetoParam) => {
+  let array = [];
+  const result = {
+    fetchMenu: () => objetoParam,
+    consumption: array,
+    order: (request) => array.push(request),
+    pay: () => {
+      let sum = 0;
+      for (let i = 0; i < array.length; i += 1) {
+        let item = array[i];
+        if (Object.keys(objetoParam.drink).includes(item)) {
+          sum += objetoParam.drink[item];
+        }
+        if (Object.keys(objetoParam.food).includes(item)) {
+          sum += objetoParam.food[item];
+        }
+      }
+      return sum * 1.1;
+    },
+  };
+  return result;
+};
+
+// const obj = createMenu({ food: { coxinha: 3.9, sopa: 3.2, sashimi: 7.9 }, drink: { agua: 2.5, refrigerante: 4.5 } });
+// obj.order('coxinha');
+// obj.order('agua');
+// obj.order('sopa');
+// obj.order('sashimi');
+// obj.order('coxinha');
+// obj.order('sashimi');
+// console.log(obj.pay());
+
+// pay: () => {
+//   let sum = 0;
+//   for (let i = 0; i < array.length; i += 1) {
+//     for (let j = 0; j < Object.keys(objetoParam.drink).length; j += 1) {
+//       if (array[i] === Object.keys(objetoParam.drink)[j]) {
+//         sum += Object.values(objetoParam.drink)[j];
+//       }
+//     }
+//     for (let h = 0; h < Object.keys(objetoParam.food).length; h += 1) {
+//       if (array[i] === Object.keys(objetoParam.food)[h]) {
+//         sum += Object.values(objetoParam.food)[h];
+//       }
+//     }
+//   }
+//   return sum * 1.1;
+// },
 
 module.exports = createMenu;
